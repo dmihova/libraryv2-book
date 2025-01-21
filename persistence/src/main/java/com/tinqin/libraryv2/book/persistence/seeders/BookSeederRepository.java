@@ -11,11 +11,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +49,7 @@ public class BookSeederRepository implements ApplicationRunner {
                         .builder()
                         .title(bookArray[5].trim())
                         .authors(getDBAuthorList(bookArray[1].trim(), bookArray[2].trim()))
+                        .stock(10)
                         .pages(rand.nextInt(50, 1000))
                         .publishYear("")
                         .build())

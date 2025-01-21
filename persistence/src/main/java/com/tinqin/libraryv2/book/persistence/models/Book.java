@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,13 +29,42 @@ public class Book {
     private String title;
 
     @Column(name = "description")
-    private String description;
+    @Builder.Default
+    private String description="";
 
     @Column(name = "publish_year")
-    private String publishYear;
+    @Builder.Default
+    private String publishYear="";
 
     @Column(name = "pages")
     private Integer pages;
+
+    @Column(name = "price", nullable = false)
+    @Builder.Default
+    private BigDecimal price =BigDecimal.ZERO;
+
+    @Builder.Default
+    @Column(name = "price_per_rental", nullable = false)
+    private BigDecimal pricePerRental =BigDecimal.ZERO;;
+
+    @Builder.Default
+    @Column(name = "stock", nullable = false)
+    private Integer stock =0;
+
+    @Column(name = "created_on", nullable = false)
+    @CreationTimestamp
+    private LocalDateTime createdOn;
+
+    @Column(name = "updated_on")
+    @CreationTimestamp
+    private LocalDateTime updatedOn;
+
+    @Builder.Default
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = Boolean.FALSE;
+
+
+
 
     @ToString.Exclude
     @JsonIgnoreProperties("books")

@@ -15,4 +15,6 @@ public interface GetBookMapper {
     ProcessorGetBookInput toOperation(ApiGetBookInput input);
 
     ApiGetBookOutput toApiResult(ProcessorGetBookOutput output);
+
+
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-20T17:57:46+0200",
+    date = "2025-01-21T11:58:18+0200",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -42,11 +42,17 @@ public class ModelMapperImpl implements ModelMapper {
 
         ApiBookOutput.ApiBookOutputBuilder apiBookOutput = ApiBookOutput.builder();
 
+        apiBookOutput.description( ModelMapper.descriptionToDescription( output.getDescription() ) );
         apiBookOutput.title( output.getTitle() );
         apiBookOutput.bookId( output.getBookId() );
-        apiBookOutput.description( output.getDescription() );
         apiBookOutput.publishYear( output.getPublishYear() );
         apiBookOutput.pages( output.getPages() );
+        apiBookOutput.price( output.getPrice() );
+        apiBookOutput.pricePerRental( output.getPricePerRental() );
+        apiBookOutput.stock( output.getStock() );
+        apiBookOutput.createdOn( output.getCreatedOn() );
+        apiBookOutput.updatedOn( output.getUpdatedOn() );
+        apiBookOutput.isDeleted( output.getIsDeleted() );
         apiBookOutput.authors( processorAuthorModelListToApiAuthorOutputList( output.getAuthors() ) );
 
         return apiBookOutput.build();

@@ -1,4 +1,4 @@
-package com.tinqin.libraryv2.book.core;
+package com.tinqin.libraryv2.book.core.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
