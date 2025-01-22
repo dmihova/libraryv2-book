@@ -4,9 +4,13 @@ public class ApiRoutes {
 
   public static final String API = "/api/v2";
 
-  public static final String BOOK = API + "/books";
-  public static final String API_BOOKS_ID = API + "/books/{bookId}";
+  public static final String API_BOOKS = API + "/books";
+  public static final String API_BOOKS_ID = API_BOOKS + "/{bookId}";
+  public static final String API_BOOKS_OPEN_LIB = API_BOOKS_ID + "/open-lib-first";
+  public static final String API_BOOKS_OPEN_LIB_ALL = API_BOOKS_ID + "/open-lib";
+  public static final String API_BOOKS_QUERY_OPEN_LIB = API + "/open-lib";
 
-
+  public static final String API_AUTHORS= API + "/authors";
+  public static final String API_AUTHORS_ID= API_AUTHORS +  "/{authorId}";
 
 }

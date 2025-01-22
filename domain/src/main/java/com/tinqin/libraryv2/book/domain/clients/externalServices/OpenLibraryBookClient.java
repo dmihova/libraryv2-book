@@ -2,7 +2,7 @@ package com.tinqin.libraryv2.book.domain.clients.externalServices;
 
 
 import com.tinqin.libraryv2.book.domain.clients.FeignConfig;
-import com.tinqin.libraryv2.book.domain.clients.externalServices.dtos.OpenLibrarySearchResponse;
+import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibrarySearchResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +22,8 @@ public interface OpenLibraryBookClient {
                                                      @RequestParam(name="page") Integer page,
                                                      @RequestParam(name="language")String language
                                                      );
+
+
 }
 
 

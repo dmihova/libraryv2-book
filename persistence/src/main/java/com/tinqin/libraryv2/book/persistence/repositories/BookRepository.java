@@ -2,6 +2,7 @@ package com.tinqin.libraryv2.book.persistence.repositories;
 
 
 import com.tinqin.libraryv2.book.persistence.models.Book;
+import io.vavr.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,4 +22,6 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 
 
     Optional<Book> findBookById(UUID id);
+
+    List<Book> findAll(Specification<Book> specification, Pageable paging);
 }

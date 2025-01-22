@@ -1,7 +1,7 @@
 package com.tinqin.libraryv2.book.apiadapter.mappers;
 
-import com.tinqin.libraryv2.book.api.operations.getBook.ApiGetBookInput;
-import com.tinqin.libraryv2.book.api.operations.getBook.ApiGetBookOutput;
+import com.tinqin.libraryv2.book.api.operations.getbook.ApiGetBookInput;
+import com.tinqin.libraryv2.book.api.operations.getbook.ApiGetBookOutput;
 import com.tinqin.libraryv2.book.apiadapter.operations.getbook.ProcessorGetBookInput;
 import com.tinqin.libraryv2.book.apiadapter.operations.getbook.ProcessorGetBookOutput;
 import org.mapstruct.Mapper;

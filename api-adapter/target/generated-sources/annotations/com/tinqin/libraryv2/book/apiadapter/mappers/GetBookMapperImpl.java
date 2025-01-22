@@ -1,7 +1,7 @@
 package com.tinqin.libraryv2.book.apiadapter.mappers;
 
-import com.tinqin.libraryv2.book.api.operations.getBook.ApiGetBookInput;
-import com.tinqin.libraryv2.book.api.operations.getBook.ApiGetBookOutput;
+import com.tinqin.libraryv2.book.api.operations.getbook.ApiGetBookInput;
+import com.tinqin.libraryv2.book.api.operations.getbook.ApiGetBookOutput;
 import com.tinqin.libraryv2.book.apiadapter.operations.getbook.ProcessorGetBookInput;
 import com.tinqin.libraryv2.book.apiadapter.operations.getbook.ProcessorGetBookOutput;
 import javax.annotation.processing.Generated;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-21T12:05:08+0200",
+    date = "2025-01-22T16:24:05+0200",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component

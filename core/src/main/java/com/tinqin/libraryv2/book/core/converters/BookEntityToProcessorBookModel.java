@@ -1,7 +1,7 @@
 package com.tinqin.libraryv2.book.core.converters;
 
 
-import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorModel;
+import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorBaseModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookModel;
 import com.tinqin.libraryv2.book.persistence.models.Book;
 import org.springframework.core.convert.converter.Converter;
@@ -28,7 +28,7 @@ public class BookEntityToProcessorBookModel implements Converter<Book, Processor
                 .authors(
                         book.getAuthors()
                                 .stream()
-                                .map(author -> ProcessorAuthorModel.builder()
+                                .map(author -> ProcessorAuthorBaseModel.builder()
                                         .authorId(author.getId().toString())
                                         .firstName(author.getFirstName())
                                         .lastName(author.getLastName())
