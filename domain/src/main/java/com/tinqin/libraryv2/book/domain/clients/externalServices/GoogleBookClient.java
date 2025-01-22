@@ -2,7 +2,7 @@ package com.tinqin.libraryv2.book.domain.clients.externalServices;
 
 
 import com.tinqin.libraryv2.book.domain.clients.FeignConfig;
-import com.tinqin.libraryv2.book.domain.clients.externalServices.dtos.GoogleBookSearchResponse;
+import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.GoogleBookSearchResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

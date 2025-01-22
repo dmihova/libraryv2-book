@@ -22,6 +22,6 @@ public class ProcessorBookModel {
     private LocalDateTime updatedOn;
     private Boolean isDeleted;
 
-    private List<ProcessorAuthorModel> authors;
+    private List<ProcessorAuthorBaseModel> authors;
 
 }
