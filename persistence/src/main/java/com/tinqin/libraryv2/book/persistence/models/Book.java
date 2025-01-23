@@ -43,14 +43,6 @@ public class Book {
     @Builder.Default
     private BigDecimal price =BigDecimal.ZERO;
 
-    @Builder.Default
-    @Column(name = "price_per_rental", nullable = false)
-    private BigDecimal pricePerRental =BigDecimal.ZERO;;
-
-    @Builder.Default
-    @Column(name = "stock", nullable = false)
-    private Integer stock =0;
-
     @Column(name = "created_on", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdOn;
@@ -58,12 +50,6 @@ public class Book {
     @Column(name = "updated_on")
     @CreationTimestamp
     private LocalDateTime updatedOn;
-
-    @Builder.Default
-    @Column(name = "is_deleted")
-    private Boolean isDeleted = Boolean.FALSE;
-
-
 
 
     @ToString.Exclude

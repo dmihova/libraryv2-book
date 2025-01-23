@@ -18,24 +18,15 @@ import java.math.BigDecimal;
 public class ApiQueryBooksInput extends ApiInput {
 
     private String title;
+    private String titleLike;
 
     @UUID
     private String authorId;
 
-    @DecimalMin(value ="0")
-    private BigDecimal priceMin;
-    @DecimalMin(value ="0")
-    private BigDecimal priceMax;
-    @DecimalMin(value ="0")
-    private BigDecimal pricePerRentalMin;
-    @DecimalMin(value ="0")
-    private BigDecimal pricePerRentalMax;
-    @DecimalMin(value ="0")
-    private Integer stockMin ;
-    @DecimalMin(value ="0")
-    private Integer stockMax ;
-
-    private Boolean isDeleted;
+    private String authorFirstName;
+    private String authorLastName;
+    private String authorFirstNameLike;
+    private String authorLastNameLike;
 
     @Builder.Default
     @Min(value = 0)

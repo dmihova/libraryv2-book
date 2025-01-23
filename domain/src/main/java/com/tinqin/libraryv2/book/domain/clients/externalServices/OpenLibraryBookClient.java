@@ -23,7 +23,16 @@ public interface OpenLibraryBookClient {
                                                      @RequestParam(name="language")String language
                                                      );
 
-
+    @GetMapping(
+            path = {"/search.json"},
+            produces = {"application/json"},
+            consumes = {"application/json"}
+    )
+    ResponseEntity<OpenLibrarySearchResponse> searchForAuthor(@RequestParam(name="author") String author,
+                                                     @RequestParam(name="limit") Integer limit,
+                                                     @RequestParam(name="page") Integer page,
+                                                     @RequestParam(name="language")String language
+    );
 }
 
 

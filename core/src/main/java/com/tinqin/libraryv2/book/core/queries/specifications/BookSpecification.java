@@ -23,30 +23,6 @@ public class BookSpecification {
             if (filter.getTitle()!=null&&!filter.getTitle().isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("title"), filter.getTitle()  ));
             }
-            if (filter.getPriceMin() != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), filter.getPriceMin()));
-            }
-
-            if (filter.getPriceMax() != null) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("price"), filter.getPriceMax()));
-            }
-
-            if (filter.getPricePerRentalMin() != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("pricePerRental"), filter.getPricePerRentalMin()));
-            }
-            if (filter.getPricePerRentalMax() != null) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("pricePerRental"), filter.getPricePerRentalMax()));
-            }
-
-            if (filter.getStockMin() != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("stock"), filter.getStockMin()));
-            }
-            if (filter.getStockMax() != null) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("stock"), filter.getStockMax()));
-            }
-            if (filter.getIsDeleted() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("isDeleted"), filter.getIsDeleted()));
-            }
 
             if (filter.getPageMin() != null&&filter.getPageMin()>0) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("page"), filter.getPageMin()));

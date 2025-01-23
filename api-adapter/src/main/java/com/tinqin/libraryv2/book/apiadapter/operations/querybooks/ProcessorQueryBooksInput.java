@@ -13,17 +13,16 @@ import java.math.BigDecimal;
 @Builder
 @Getter
 @AllArgsConstructor
-@Setter
 public class ProcessorQueryBooksInput implements ProcessorInput {
 
     private String title;
+    private String titleLike;
+
     private String authorId;
-    private BigDecimal priceMin;
-    private BigDecimal priceMax;
-    private BigDecimal pricePerRentalMin;
-    private BigDecimal pricePerRentalMax;
-    private Integer stockMin ;
-    private Integer stockMax ;
-    private Boolean isDeleted;
-    private Integer page ;
+    private String authorFirstName;
+    private String authorLastName;
+    private String authorFirstNameLike;
+    private String authorLastNameLike;
+
+    private Integer page;
 }

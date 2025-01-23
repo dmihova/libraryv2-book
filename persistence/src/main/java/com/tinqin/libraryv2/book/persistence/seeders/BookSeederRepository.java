@@ -49,7 +49,6 @@ public class BookSeederRepository implements ApplicationRunner {
                         .builder()
                         .title(bookArray[5].trim())
                         .authors(getDBAuthorList(bookArray[1].trim(), bookArray[2].trim()))
-                        .stock(10)
                         .pages(rand.nextInt(50, 1000))
                         .publishYear("")
                         .build())

@@ -22,19 +22,23 @@ public interface ModelMapper {
     ApiBookModel toBook(ProcessorBookModel output);
 
     @Named("descriptionToDescription")
-    static String descriptionToDescription(String  description) {
-        if (description == null||description.isEmpty()){
+    static String descriptionToDescription(String description) {
+        if (description == null || description.isEmpty()) {
             return "N/A";
         }
-        return  description;
+        return description;
     }
 
 
     ApiBookOpenLibModel toBookOpenLib(ProcessorBookOpenLibModel output);
+
     List<ApiBookOpenLibModel> toBooksOpenLib(List<ProcessorBookOpenLibModel> output);
 
     ApiAuthorBaseModel toAuthor(ProcessorAuthorBaseModel output);
-    ApiAuthorModel  toAuthor(ProcessorAuthorModel output);
+
+    ApiAuthorModel toAuthor(ProcessorAuthorModel output);
+
     List<ApiBookBaseModel> toBooks(List<ProcessorBookBaseModel> output);
+
     ApiBookBaseModel toBook(ProcessorBookBaseModel output);
 }

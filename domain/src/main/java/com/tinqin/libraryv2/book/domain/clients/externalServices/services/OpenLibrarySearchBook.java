@@ -50,7 +50,10 @@ public class OpenLibrarySearchBook implements SearchBook<OpenLibraryDoc> {
 
     @Override
     public List<OpenLibraryDoc> searchBooksByAuthor(String author, Integer page) {
-        return List.of();
+        ResponseEntity<OpenLibrarySearchResponse> response =
+                openLibraryBookClient.searchForAuthor(author,100, page, "eng");
+        return Arrays.stream(formatResult(response)).toList();
+
     }
 
 

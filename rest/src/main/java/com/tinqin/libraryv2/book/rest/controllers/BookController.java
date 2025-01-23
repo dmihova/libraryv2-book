@@ -21,10 +21,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
@@ -38,26 +35,23 @@ public class BookController extends BaseController {
     @GetMapping(ApiRoutes.API_BOOKS)
     public ResponseEntity<?> queryBooks(
             @RequestParam(name = "title", required = false, defaultValue = "") String title,
+            @RequestParam(name = "titleLike", required = false, defaultValue = "") String titleLike,
             @Valid @RequestParam(name = "authorId", required = false) String authorId,
-            @Valid @RequestParam(name = "priceMin", required = false) BigDecimal priceMin,
-            @Valid @RequestParam(name = "priceMax", required = false) BigDecimal priceMax,
-            @Valid @RequestParam(name = "pricePerRentalMin", required = false) BigDecimal pricePerRentalMin,
-            @Valid @RequestParam(name = "pricePerRentalMax", required = false) BigDecimal pricePerRentalMax,
-            @Valid @RequestParam(name = "stockMin", required = false) Integer stockMin,
-            @Valid @RequestParam(name = "stockMax", required = false) Integer stockMax,
+            @Valid @RequestParam(name = "authorFirstName", required = false) String authorFirstName,
+            @Valid @RequestParam(name = "authorFirstNameLike", required = false) String authorFirstNameLike,
+            @Valid @RequestParam(name = "authorLastName", required = false) String authorLastName,
+            @Valid @RequestParam(name = "authorLastNameLike", required = false) String authorLastNameLike,
             @Valid @RequestParam(name = "page", required = false, defaultValue = "0") Integer page
-
     ) {
         ApiQueryBooksInput bookInput = ApiQueryBooksInput
                 .builder()
                 .title(title)
+                .titleLike(titleLike)
                 .authorId(authorId)
-                .priceMin(priceMin)
-                .priceMax(priceMax)
-                .pricePerRentalMin(pricePerRentalMin)
-                .pricePerRentalMax(pricePerRentalMax)
-                .stockMin(stockMin)
-                .stockMax(stockMax)
+                .authorFirstName(authorFirstName)
+                .authorFirstNameLike(authorFirstNameLike)
+                .authorLastName(authorLastName)
+                .authorLastNameLike(authorLastNameLike)
                 .page(page)
                 .build();
         Either<ApiError, ApiQueryBooksOutput> result = apiAdapterBook.queryBooks(bookInput);
@@ -122,4 +116,7 @@ public class BookController extends BaseController {
         return mapToResponseEntity(result, HttpStatus.OK);
 
     }
+
+
+
 }

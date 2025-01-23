@@ -1,4 +1,4 @@
-package com.tinqin.libraryv2.book.apiadapter.operations.getauthor;
+package com.tinqin.libraryv2.book.apiadapter.operations.getauthorbooksopenlib;
 
 import com.tinqin.libraryv2.book.apiadapter.operations.base.ProcessorInput;
 import jakarta.validation.constraints.NotBlank;
@@ -12,9 +12,11 @@ import org.hibernate.validator.constraints.UUID;
 @Getter
 @AllArgsConstructor
 @Setter
-public class ProcessorGetAuthorInput implements ProcessorInput {
+public class ProcessorGetAuthorBooksOpenLibInput implements ProcessorInput {
     @UUID
     @NotBlank
     String authorId;
 
+    @Builder.Default
+    Integer page =1;
 }
