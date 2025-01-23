@@ -1,6 +1,5 @@
 package com.tinqin.libraryv2.book.core.converters;
 
-import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorBaseModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookBaseModel;
 import com.tinqin.libraryv2.book.persistence.models.Author;

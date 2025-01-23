@@ -12,5 +12,5 @@ public interface SearchBook <R extends VolumeInfo>{
 
     Optional<R> getFirstBook(String bookName, String author);
 
-    List<R> searchBooksByAuthor( String author,Integer page);
+    List<R> searchBooksByAuthor(String author,Integer page);
 }

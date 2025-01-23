@@ -20,12 +20,9 @@ public class BookEntityToProcessorBookModel implements Converter<Book, Processor
                 .description(book.getDescription())
                 .publishYear(book.getPublishYear())
                 .price(book.getPrice())
-                .pricePerRental(book.getPricePerRental())
-                .stock(book.getStock())
                 .createdOn(book.getCreatedOn())
                 .updatedOn(book.getUpdatedOn())
-                .isDeleted(book.getIsDeleted())
-                .authors(
+                 .authors(
                         book.getAuthors()
                                 .stream()
                                 .map(author -> ProcessorAuthorBaseModel.builder()

@@ -6,7 +6,6 @@ import lombok.Setter;
 
 @Builder
 @Getter
-@Setter
 public class ProcessorBookOpenLibModel {
     String title;
     private String publishYear;

@@ -25,14 +25,6 @@ public class QueryBookFilter   {
     private String authorFirstNameLike;
     private String authorLastNameLike;
 
-    private BigDecimal priceMin;
-    private BigDecimal priceMax;
-    private BigDecimal pricePerRentalMin;
-    private BigDecimal pricePerRentalMax;
-    private Integer stockMin ;
-    private Integer stockMax ;
-    private Boolean isDeleted;
-
     private Integer pageMin ;
     private Integer pageMax ;
 

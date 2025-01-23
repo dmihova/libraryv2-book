@@ -16,14 +16,12 @@ public class QueryBooksInputToQueryBookFilter implements Converter<ProcessorQuer
         return QueryBookFilter
                 .builder()
                 .authorId( source.getAuthorId()!=null ? UUID.fromString( source.getAuthorId()):null)
-                .titleLike(source.getTitle())
-                .priceMax(source.getPriceMax())
-                .priceMin(source.getPriceMin())
-                .stockMin(source.getStockMin())
-                .stockMax(source.getStockMax())
-                .pricePerRentalMax(source.getPricePerRentalMax())
-                .pricePerRentalMin(source.getPricePerRentalMin())
-                .isDeleted(source.getIsDeleted())
-                             .build();
+                .titleLike(source.getTitleLike())
+                .title( source.getTitle() )
+                .authorFirstNameLike(source.getAuthorFirstNameLike())
+                .authorLastNameLike(source.getAuthorLastNameLike())
+                .authorFirstName(source.getAuthorFirstName())
+                .authorLastName(source.getAuthorLastName())
+                .build();
     }
 }
