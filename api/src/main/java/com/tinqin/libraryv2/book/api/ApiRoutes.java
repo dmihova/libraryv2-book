@@ -9,6 +9,7 @@ public class ApiRoutes {
   public static final String API_BOOKS_OPEN_LIB = API_BOOKS_ID + "/open-lib-first";
   public static final String API_BOOKS_OPEN_LIB_ALL = API_BOOKS_ID + "/open-lib";
   public static final String API_BOOKS_QUERY_OPEN_LIB = API + "/open-lib";
+  public static final String API_BOOKS_QUERY_ALGO_LIB = API + "/algo-lib";
 
   public static final String API_AUTHORS= API + "/authors";
   public static final String API_AUTHORS_ID= API_AUTHORS +  "/{authorId}";

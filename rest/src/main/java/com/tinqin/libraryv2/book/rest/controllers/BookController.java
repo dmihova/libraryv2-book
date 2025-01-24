@@ -10,6 +10,8 @@ import com.tinqin.libraryv2.book.api.operations.getbooksopenlib.ApiGetBooksOpenL
 import com.tinqin.libraryv2.book.api.operations.getbooksopenlib.ApiGetBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.api.operations.querybooks.ApiQueryBooksInput;
 import com.tinqin.libraryv2.book.api.operations.querybooks.ApiQueryBooksOutput;
+import com.tinqin.libraryv2.book.api.operations.querybooksalgolib.ApiQueryBooksAlgoLibInput;
+import com.tinqin.libraryv2.book.api.operations.querybooksalgolib.ApiQueryBooksAlgoLibOutput;
 import com.tinqin.libraryv2.book.api.operations.querybooksopenlib.ApiQueryBooksOpenLibInput;
 import com.tinqin.libraryv2.book.api.operations.querybooksopenlib.ApiQueryBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.apiadapter.ApiAdapterBook;
@@ -22,8 +24,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,23 +57,23 @@ public class BookController extends BaseController {
         Either<ApiError, ApiQueryBooksOutput> result = apiAdapterBook.queryBooks(bookInput);
         return mapToResponseEntity(result, HttpStatus.OK);
     }
+
     @GetMapping(ApiRoutes.API_BOOKS_QUERY_OPEN_LIB)
     public ResponseEntity<?> queryBooksOpenLib(
-            @Valid @RequestParam(name = "title", required = true ) String title,
-            @Valid @RequestParam(name = "author", required = true) String author ,
+            @Valid @RequestParam(name = "title") String title,
+            @Valid @RequestParam(name = "author") String author,
             @Valid @RequestParam(name = "page", required = false, defaultValue = "1") Integer page
 
     ) {
         ApiQueryBooksOpenLibInput bookInput = ApiQueryBooksOpenLibInput
                 .builder()
                 .title(title)
-                .author (author )
+                .author(author)
                 .page(page)
                 .build();
         Either<ApiError, ApiQueryBooksOpenLibOutput> result = apiAdapterBook.queryBooksOpenLib(bookInput);
         return mapToResponseEntity(result, HttpStatus.OK);
     }
-
 
 
     @Operation(summary = "Get book by UUID",
@@ -107,16 +107,31 @@ public class BookController extends BaseController {
     public ResponseEntity<?> getBooksOpenLib(@PathVariable("bookId") String bookId,
                                              @RequestParam(name = "page", required = false, defaultValue = "1") Integer page
     ) {
-        ApiGetBooksOpenLibInput bookInput = ApiGetBooksOpenLibInput
+        ApiGetBooksOpenLibInput apiInput = ApiGetBooksOpenLibInput
                 .builder()
                 .bookId(bookId)
                 .page(page)
                 .build();
-        Either<ApiError, ApiGetBooksOpenLibOutput> result = apiAdapterBook.getBooksOpenLib(bookInput);
+        Either<ApiError, ApiGetBooksOpenLibOutput> result = apiAdapterBook.getBooksOpenLib(apiInput);
         return mapToResponseEntity(result, HttpStatus.OK);
 
     }
 
 
+    @GetMapping(ApiRoutes.API_BOOKS_QUERY_ALGO_LIB)
+    public ResponseEntity<?> queryBooksOpenLib(
+            @Valid @RequestParam(name = "title") String title,
+            @Valid @RequestParam(name = "author", required = false, defaultValue = "") String author,
+            @Valid @RequestParam(name = "authorLike", required = false, defaultValue = "") String authorLike
 
+    ) {
+        ApiQueryBooksAlgoLibInput apiInput = ApiQueryBooksAlgoLibInput
+                .builder()
+                .title(title)
+                .author(author)
+                .authorLike(authorLike)
+                .build();
+        Either<ApiError, ApiQueryBooksAlgoLibOutput> result = apiAdapterBook.queryBooksAlgoLib(apiInput);
+        return mapToResponseEntity(result, HttpStatus.OK);
+    }
 }

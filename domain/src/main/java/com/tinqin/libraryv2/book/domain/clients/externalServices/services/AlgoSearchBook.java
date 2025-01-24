@@ -23,8 +23,8 @@ public class AlgoSearchBook {
         ResponseEntity<List<AlgoBookVolume>> response = algoBookApiClient.searchAuthor(author);
         return List.of();
     }
-    public List<AlgoBookResponse> searchTitle(String title) {
+    public List<AlgoBookVolume> searchTitle(String title) {
         ResponseEntity<List<AlgoBookVolume>> response = algoBookApiClient.searchTitle(title);
-        return List.of();
+        return response.getBody();
     }
 }

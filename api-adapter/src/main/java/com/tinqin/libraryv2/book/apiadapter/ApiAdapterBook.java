@@ -10,6 +10,8 @@ import com.tinqin.libraryv2.book.api.operations.getbooksopenlib.ApiGetBooksOpenL
 import com.tinqin.libraryv2.book.api.operations.getbooksopenlib.ApiGetBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.api.operations.querybooks.ApiQueryBooksInput;
 import com.tinqin.libraryv2.book.api.operations.querybooks.ApiQueryBooksOutput;
+import com.tinqin.libraryv2.book.api.operations.querybooksalgolib.ApiQueryBooksAlgoLibInput;
+import com.tinqin.libraryv2.book.api.operations.querybooksalgolib.ApiQueryBooksAlgoLibOutput;
 import com.tinqin.libraryv2.book.api.operations.querybooksopenlib.ApiQueryBooksOpenLibInput;
 import com.tinqin.libraryv2.book.api.operations.querybooksopenlib.ApiQueryBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.apiadapter.errors.OperationError;
@@ -26,6 +28,9 @@ import com.tinqin.libraryv2.book.apiadapter.operations.getbooksopenlib.Processor
 import com.tinqin.libraryv2.book.apiadapter.operations.querybooks.ProcessorQueryBooksInput;
 import com.tinqin.libraryv2.book.apiadapter.operations.querybooks.ProcessorQueryBooksOutput;
 import com.tinqin.libraryv2.book.apiadapter.operations.querybooks.QueryBooks;
+import com.tinqin.libraryv2.book.apiadapter.operations.querybooksalgolib.ProcessorQueryBooksAlgoLibInput;
+import com.tinqin.libraryv2.book.apiadapter.operations.querybooksalgolib.ProcessorQueryBooksAlgoLibOutput;
+import com.tinqin.libraryv2.book.apiadapter.operations.querybooksalgolib.QueryBooksAlgoLib;
 import com.tinqin.libraryv2.book.apiadapter.operations.querybooksopenlib.ProcessorQueryBooksOpenLibInput;
 import com.tinqin.libraryv2.book.apiadapter.operations.querybooksopenlib.ProcessorQueryBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.apiadapter.operations.querybooksopenlib.QueryBooksOpenLib;
@@ -43,13 +48,14 @@ public class ApiAdapterBook {
     private final GetBookOpenLibFirstMapper getBookOpenLibFirstMapper;
     private final GetBooksOpenLibMapper getBooksOpenLibMapper;
     private final QueryBooksOpenLibMapper queryBooksOpenLibMapper;
+    private final QueryBooksAlgoLibMapper queryBooksAlgoLibMapper;
     //Processors
     private final GetBook getBook;
     private final QueryBooks queryBooks;
     private final GetBookOpenLibFirst getBookOpenLibFirst;
     private final GetBooksOpenLib getBooksOpenLib;
     private final QueryBooksOpenLib queryBooksOpenLib;
-
+    private final QueryBooksAlgoLib queryBooksAlgoLib;
 
     public Either<ApiError, ApiQueryBooksOutput> queryBooks(ApiQueryBooksInput  apiInput) {
         ProcessorQueryBooksInput operationInput = queryBooksMapper.toOperation(apiInput);
@@ -100,6 +106,16 @@ public class ApiAdapterBook {
 
         return processed.isRight()
                 ? Either.right(queryBooksOpenLibMapper.toApiResult(processed.get()))
+                : Either.left(modelMapper.toApiError(processed.getLeft()));
+    }
+
+    public Either<ApiError, ApiQueryBooksAlgoLibOutput> queryBooksAlgoLib(ApiQueryBooksAlgoLibInput apiInput) {
+        ProcessorQueryBooksAlgoLibInput operationInput = queryBooksAlgoLibMapper.toOperation(apiInput);
+
+        Either<OperationError, ProcessorQueryBooksAlgoLibOutput> processed = queryBooksAlgoLib.process(operationInput);
+
+        return processed.isRight()
+                ? Either.right(queryBooksAlgoLibMapper.toApiResult(processed.get()))
                 : Either.left(modelMapper.toApiError(processed.getLeft()));
     }
 }
