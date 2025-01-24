@@ -2,6 +2,7 @@ package com.tinqin.libraryv2.book.apiadapter.mappers;
 
 import com.tinqin.libraryv2.book.api.models.ApiAuthorBaseModel;
 import com.tinqin.libraryv2.book.api.models.ApiAuthorModel;
+import com.tinqin.libraryv2.book.api.models.ApiBookAlgoLibModel;
 import com.tinqin.libraryv2.book.api.models.ApiBookBaseModel;
 import com.tinqin.libraryv2.book.api.models.ApiBookModel;
 import com.tinqin.libraryv2.book.api.models.ApiBookOpenLibModel;
@@ -9,6 +10,7 @@ import com.tinqin.libraryv2.book.api.models.ApiError;
 import com.tinqin.libraryv2.book.apiadapter.errors.OperationError;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorBaseModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorModel;
+import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookAlgoLibModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookBaseModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookOpenLibModel;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-23T10:07:53+0200",
+    date = "2025-01-24T15:20:05+0200",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -171,6 +173,49 @@ public class ModelMapperImpl implements ModelMapper {
         apiBookBaseModel.bookId( output.getBookId() );
 
         return apiBookBaseModel.build();
+    }
+
+    @Override
+    public ApiBookAlgoLibModel toBookAlgoLib(ProcessorBookAlgoLibModel output) {
+        if ( output == null ) {
+            return null;
+        }
+
+        ApiBookAlgoLibModel.ApiBookAlgoLibModelBuilder apiBookAlgoLibModel = ApiBookAlgoLibModel.builder();
+
+        apiBookAlgoLibModel.title( output.getTitle() );
+        String[] authors = output.getAuthors();
+        if ( authors != null ) {
+            apiBookAlgoLibModel.authors( Arrays.copyOf( authors, authors.length ) );
+        }
+        apiBookAlgoLibModel.description( output.getDescription() );
+        apiBookAlgoLibModel.pages( output.getPages() );
+        apiBookAlgoLibModel.publishYear( output.getPublishYear() );
+        apiBookAlgoLibModel.imgUrl( output.getImgUrl() );
+        String[] categories = output.getCategories();
+        if ( categories != null ) {
+            apiBookAlgoLibModel.categories( Arrays.copyOf( categories, categories.length ) );
+        }
+        String[] isbns = output.getIsbns();
+        if ( isbns != null ) {
+            apiBookAlgoLibModel.isbns( Arrays.copyOf( isbns, isbns.length ) );
+        }
+
+        return apiBookAlgoLibModel.build();
+    }
+
+    @Override
+    public List<ApiBookAlgoLibModel> toBooksAlgoLib(List<ProcessorBookAlgoLibModel> output) {
+        if ( output == null ) {
+            return null;
+        }
+
+        List<ApiBookAlgoLibModel> list = new ArrayList<ApiBookAlgoLibModel>( output.size() );
+        for ( ProcessorBookAlgoLibModel processorBookAlgoLibModel : output ) {
+            list.add( toBookAlgoLib( processorBookAlgoLibModel ) );
+        }
+
+        return list;
     }
 
     protected List<ApiAuthorBaseModel> processorAuthorBaseModelListToApiAuthorBaseModelList(List<ProcessorAuthorBaseModel> list) {

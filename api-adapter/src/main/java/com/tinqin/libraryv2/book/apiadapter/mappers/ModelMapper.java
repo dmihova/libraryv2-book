@@ -41,4 +41,9 @@ public interface ModelMapper {
     List<ApiBookBaseModel> toBooks(List<ProcessorBookBaseModel> output);
 
     ApiBookBaseModel toBook(ProcessorBookBaseModel output);
+
+    ApiBookAlgoLibModel toBookAlgoLib(ProcessorBookAlgoLibModel output);
+
+    List<ApiBookAlgoLibModel> toBooksAlgoLib(List<ProcessorBookAlgoLibModel> output);
+
 }
