@@ -1,22 +1,19 @@
 package com.tinqin.libraryv2.book.persistence.models;
 
+
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.UUID;
 
+@Table
 @Entity
-@Table(name = "series")
-public class Series {
+@Getter
+public class AuthorStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "description", nullable = true)
-    private String description;
-
-
+    private UUID authorUID;
 }

@@ -3,7 +3,7 @@ package com.tinqin.libraryv2.book.apiadapter.models;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,5 +20,7 @@ public class ProcessorBookModel {
 
     private List<ProcessorAuthorBaseModel> authors;
     private List<String> categories;
+    private String series;
+
 
 }
