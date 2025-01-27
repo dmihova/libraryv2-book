@@ -2,7 +2,6 @@ package com.tinqin.libraryv2.book.persistence.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -51,6 +50,8 @@ public class Book {
     @CreationTimestamp
     private LocalDateTime updatedOn;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AuthorSeries authorSeries;
 
     @ToString.Exclude
     @JsonIgnoreProperties("books")

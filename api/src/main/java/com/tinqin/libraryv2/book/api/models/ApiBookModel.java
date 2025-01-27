@@ -24,6 +24,7 @@ public class ApiBookModel extends ApiOutput {
     private LocalDateTime updatedOn;
     private List<ApiAuthorBaseModel> authors;
     private List<String> categories;
+    private String series;
 
 
 

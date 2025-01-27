@@ -37,6 +37,7 @@ public class BookEntityToProcessorBookModel implements Converter<Book, Processor
                         .map(Category::getName)
                         .toList()
                 )
+                .series(book.getAuthorSeries() != null ? book.getAuthorSeries().getName() : "")
                 .build();
     }
 }

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-27T12:31:34+0200",
+    date = "2025-01-27T14:47:57+0200",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -65,6 +65,7 @@ public class ModelMapperImpl implements ModelMapper {
         if ( list1 != null ) {
             apiBookModel.categories( new ArrayList<String>( list1 ) );
         }
+        apiBookModel.series( output.getSeries() );
 
         return apiBookModel.build();
     }
