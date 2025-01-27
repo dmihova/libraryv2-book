@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tinqin.libraryv2.book.api.models.base.ApiOutput;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,16 +18,12 @@ public class ApiBookModel extends ApiOutput {
     private String description;
     private String publishYear;
     private Integer pages;
-    private BigDecimal price;
-    private BigDecimal pricePerRental;
-    private Integer stock;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDateTime createdOn;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDateTime updatedOn;
-
-    private Boolean isDeleted;
     private List<ApiAuthorBaseModel> authors;
+    private List<String> categories;
 
 
 

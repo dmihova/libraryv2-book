@@ -7,7 +7,7 @@ import com.tinqin.libraryv2.book.apiadapter.operations.getbooksopenlib.Processor
 import com.tinqin.libraryv2.book.apiadapter.operations.getbooksopenlib.ProcessorGetBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.core.errorhandler.base.ErrorHandler;
 import com.tinqin.libraryv2.book.core.errorhandler.exceptions.NotFoundException;
-import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryDoc;
+import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryVolume;
 import com.tinqin.libraryv2.book.domain.clients.externalServices.services.OpenLibrarySearchBook;
 import com.tinqin.libraryv2.book.persistence.models.Author;
 import com.tinqin.libraryv2.book.persistence.models.Book;
@@ -46,13 +46,13 @@ public class GetBooksOpenLibProcessor implements GetBooksOpenLib {
                     .stream()
                     .map(Author::getFullName)
                     .findFirst().orElse("");
-            List<OpenLibraryDoc> openLibraryDocs = openLibrarySearchBook
+            List<OpenLibraryVolume> openLibraryDocs = openLibrarySearchBook
                     .searchBook(bookEntity.getTitle(), author);
 
             return ProcessorGetBooksOpenLibOutput
                     .builder()
                     .bookId(bookEntity.getId())
-                    .booksOpenLib(
+                    .openLibBooks(
                             openLibraryDocs
                                     .stream()
                                     .map(openLibraryDoc -> conversionService.convert(openLibraryDoc, ProcessorBookOpenLibModel.class))

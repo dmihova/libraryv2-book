@@ -19,8 +19,9 @@ public interface GoogleBookClient {
     ResponseEntity<GoogleBookSearchResponse> search(@RequestParam(name="q") String q,
                                                     @RequestParam(name="startIndex") Integer startIndex,
                                                     @RequestParam(name="maxResults") Integer maxResults,
-                                                    @RequestParam(name="printType") String printType
-                                                     );
+                                                    @RequestParam(name="printType") String printType,
+                                                    @RequestParam(name="langRestrict" ) String langRestrict
+                                                    );
 }
 
 

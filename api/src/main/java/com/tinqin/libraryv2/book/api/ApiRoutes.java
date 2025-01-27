@@ -15,6 +15,6 @@ public class ApiRoutes {
   public static final String API_AUTHORS_ID= API_AUTHORS +  "/{authorId}";
   public static final String API_AUTHORS_OPEN_LIB= API_AUTHORS_ID +  "/open-lib-list";
   public static final String API_AUTHORS_OPEN_LIB_ADD= API_AUTHORS_ID +  "/open-lib-add";
-
-
+  public static final String API_AUTHORS_ALGO_LIB= API_AUTHORS_ID +  "/algo-lib-list";
+  public static final String API_AUTHORS_GOOGLE= API_AUTHORS_ID +  "/google-books-list";
 }

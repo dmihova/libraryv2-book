@@ -1,17 +1,19 @@
 package com.tinqin.libraryv2.book.apiadapter.mappers;
 
+import com.tinqin.libraryv2.book.api.models.ApiAlgoLibBookModel;
 import com.tinqin.libraryv2.book.api.models.ApiAuthorBaseModel;
 import com.tinqin.libraryv2.book.api.models.ApiAuthorModel;
-import com.tinqin.libraryv2.book.api.models.ApiBookAlgoLibModel;
 import com.tinqin.libraryv2.book.api.models.ApiBookBaseModel;
 import com.tinqin.libraryv2.book.api.models.ApiBookModel;
-import com.tinqin.libraryv2.book.api.models.ApiBookOpenLibModel;
 import com.tinqin.libraryv2.book.api.models.ApiError;
+import com.tinqin.libraryv2.book.api.models.ApiGoogleBooksBookModel;
+import com.tinqin.libraryv2.book.api.models.ApiOpenLibBookModel;
 import com.tinqin.libraryv2.book.apiadapter.errors.OperationError;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorBaseModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookAlgoLibModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookBaseModel;
+import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookGoogleBooksModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookOpenLibModel;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-24T15:20:05+0200",
+    date = "2025-01-27T12:31:34+0200",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -56,64 +58,15 @@ public class ModelMapperImpl implements ModelMapper {
         apiBookModel.bookId( output.getBookId() );
         apiBookModel.publishYear( output.getPublishYear() );
         apiBookModel.pages( output.getPages() );
-        apiBookModel.price( output.getPrice() );
-        apiBookModel.pricePerRental( output.getPricePerRental() );
-        apiBookModel.stock( output.getStock() );
         apiBookModel.createdOn( output.getCreatedOn() );
         apiBookModel.updatedOn( output.getUpdatedOn() );
-        apiBookModel.isDeleted( output.getIsDeleted() );
         apiBookModel.authors( processorAuthorBaseModelListToApiAuthorBaseModelList( output.getAuthors() ) );
+        List<String> list1 = output.getCategories();
+        if ( list1 != null ) {
+            apiBookModel.categories( new ArrayList<String>( list1 ) );
+        }
 
         return apiBookModel.build();
-    }
-
-    @Override
-    public ApiBookOpenLibModel toBookOpenLib(ProcessorBookOpenLibModel output) {
-        if ( output == null ) {
-            return null;
-        }
-
-        ApiBookOpenLibModel.ApiBookOpenLibModelBuilder apiBookOpenLibModel = ApiBookOpenLibModel.builder();
-
-        apiBookOpenLibModel.title( output.getTitle() );
-        apiBookOpenLibModel.publishYear( output.getPublishYear() );
-        apiBookOpenLibModel.pages( output.getPages() );
-        String[] authorNames = output.getAuthorNames();
-        if ( authorNames != null ) {
-            apiBookOpenLibModel.authorNames( Arrays.copyOf( authorNames, authorNames.length ) );
-        }
-        String[] authorKeys = output.getAuthorKeys();
-        if ( authorKeys != null ) {
-            apiBookOpenLibModel.authorKeys( Arrays.copyOf( authorKeys, authorKeys.length ) );
-        }
-        String[] isbns = output.getIsbns();
-        if ( isbns != null ) {
-            apiBookOpenLibModel.isbns( Arrays.copyOf( isbns, isbns.length ) );
-        }
-        String[] subjects = output.getSubjects();
-        if ( subjects != null ) {
-            apiBookOpenLibModel.subjects( Arrays.copyOf( subjects, subjects.length ) );
-        }
-        String[] subjectKeys = output.getSubjectKeys();
-        if ( subjectKeys != null ) {
-            apiBookOpenLibModel.subjectKeys( Arrays.copyOf( subjectKeys, subjectKeys.length ) );
-        }
-
-        return apiBookOpenLibModel.build();
-    }
-
-    @Override
-    public List<ApiBookOpenLibModel> toBooksOpenLib(List<ProcessorBookOpenLibModel> output) {
-        if ( output == null ) {
-            return null;
-        }
-
-        List<ApiBookOpenLibModel> list = new ArrayList<ApiBookOpenLibModel>( output.size() );
-        for ( ProcessorBookOpenLibModel processorBookOpenLibModel : output ) {
-            list.add( toBookOpenLib( processorBookOpenLibModel ) );
-        }
-
-        return list;
     }
 
     @Override
@@ -176,43 +129,135 @@ public class ModelMapperImpl implements ModelMapper {
     }
 
     @Override
-    public ApiBookAlgoLibModel toBookAlgoLib(ProcessorBookAlgoLibModel output) {
+    public ApiOpenLibBookModel toOpenLibBook(ProcessorBookOpenLibModel output) {
         if ( output == null ) {
             return null;
         }
 
-        ApiBookAlgoLibModel.ApiBookAlgoLibModelBuilder apiBookAlgoLibModel = ApiBookAlgoLibModel.builder();
+        ApiOpenLibBookModel.ApiOpenLibBookModelBuilder apiOpenLibBookModel = ApiOpenLibBookModel.builder();
 
-        apiBookAlgoLibModel.title( output.getTitle() );
-        String[] authors = output.getAuthors();
-        if ( authors != null ) {
-            apiBookAlgoLibModel.authors( Arrays.copyOf( authors, authors.length ) );
+        apiOpenLibBookModel.title( output.getTitle() );
+        apiOpenLibBookModel.publishYear( output.getPublishYear() );
+        apiOpenLibBookModel.pages( output.getPages() );
+        String[] authorNames = output.getAuthorNames();
+        if ( authorNames != null ) {
+            apiOpenLibBookModel.authorNames( Arrays.copyOf( authorNames, authorNames.length ) );
         }
-        apiBookAlgoLibModel.description( output.getDescription() );
-        apiBookAlgoLibModel.pages( output.getPages() );
-        apiBookAlgoLibModel.publishYear( output.getPublishYear() );
-        apiBookAlgoLibModel.imgUrl( output.getImgUrl() );
-        String[] categories = output.getCategories();
-        if ( categories != null ) {
-            apiBookAlgoLibModel.categories( Arrays.copyOf( categories, categories.length ) );
+        String[] authorKeys = output.getAuthorKeys();
+        if ( authorKeys != null ) {
+            apiOpenLibBookModel.authorKeys( Arrays.copyOf( authorKeys, authorKeys.length ) );
         }
         String[] isbns = output.getIsbns();
         if ( isbns != null ) {
-            apiBookAlgoLibModel.isbns( Arrays.copyOf( isbns, isbns.length ) );
+            apiOpenLibBookModel.isbns( Arrays.copyOf( isbns, isbns.length ) );
+        }
+        String[] subjects = output.getSubjects();
+        if ( subjects != null ) {
+            apiOpenLibBookModel.subjects( Arrays.copyOf( subjects, subjects.length ) );
+        }
+        String[] subjectKeys = output.getSubjectKeys();
+        if ( subjectKeys != null ) {
+            apiOpenLibBookModel.subjectKeys( Arrays.copyOf( subjectKeys, subjectKeys.length ) );
         }
 
-        return apiBookAlgoLibModel.build();
+        return apiOpenLibBookModel.build();
     }
 
     @Override
-    public List<ApiBookAlgoLibModel> toBooksAlgoLib(List<ProcessorBookAlgoLibModel> output) {
+    public List<ApiOpenLibBookModel> toOpenLibBooks(List<ProcessorBookOpenLibModel> output) {
         if ( output == null ) {
             return null;
         }
 
-        List<ApiBookAlgoLibModel> list = new ArrayList<ApiBookAlgoLibModel>( output.size() );
+        List<ApiOpenLibBookModel> list = new ArrayList<ApiOpenLibBookModel>( output.size() );
+        for ( ProcessorBookOpenLibModel processorBookOpenLibModel : output ) {
+            list.add( toOpenLibBook( processorBookOpenLibModel ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public ApiAlgoLibBookModel toAlgoLibBook(ProcessorBookAlgoLibModel output) {
+        if ( output == null ) {
+            return null;
+        }
+
+        ApiAlgoLibBookModel.ApiAlgoLibBookModelBuilder apiAlgoLibBookModel = ApiAlgoLibBookModel.builder();
+
+        apiAlgoLibBookModel.title( output.getTitle() );
+        String[] authors = output.getAuthors();
+        if ( authors != null ) {
+            apiAlgoLibBookModel.authors( Arrays.copyOf( authors, authors.length ) );
+        }
+        apiAlgoLibBookModel.description( output.getDescription() );
+        apiAlgoLibBookModel.pages( output.getPages() );
+        apiAlgoLibBookModel.publishYear( output.getPublishYear() );
+        apiAlgoLibBookModel.imgUrl( output.getImgUrl() );
+        String[] categories = output.getCategories();
+        if ( categories != null ) {
+            apiAlgoLibBookModel.categories( Arrays.copyOf( categories, categories.length ) );
+        }
+        String[] isbns = output.getIsbns();
+        if ( isbns != null ) {
+            apiAlgoLibBookModel.isbns( Arrays.copyOf( isbns, isbns.length ) );
+        }
+
+        return apiAlgoLibBookModel.build();
+    }
+
+    @Override
+    public List<ApiAlgoLibBookModel> toAlgoLibBooks(List<ProcessorBookAlgoLibModel> output) {
+        if ( output == null ) {
+            return null;
+        }
+
+        List<ApiAlgoLibBookModel> list = new ArrayList<ApiAlgoLibBookModel>( output.size() );
         for ( ProcessorBookAlgoLibModel processorBookAlgoLibModel : output ) {
-            list.add( toBookAlgoLib( processorBookAlgoLibModel ) );
+            list.add( toAlgoLibBook( processorBookAlgoLibModel ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public ApiGoogleBooksBookModel toGoogleBooksBook(ProcessorBookGoogleBooksModel output) {
+        if ( output == null ) {
+            return null;
+        }
+
+        ApiGoogleBooksBookModel.ApiGoogleBooksBookModelBuilder apiGoogleBooksBookModel = ApiGoogleBooksBookModel.builder();
+
+        apiGoogleBooksBookModel.externalId( output.getExternalId() );
+        apiGoogleBooksBookModel.title( output.getTitle() );
+        apiGoogleBooksBookModel.description( output.getDescription() );
+        String[] authors = output.getAuthors();
+        if ( authors != null ) {
+            apiGoogleBooksBookModel.authors( Arrays.copyOf( authors, authors.length ) );
+        }
+        apiGoogleBooksBookModel.pageCount( output.getPageCount() );
+        String[] categories = output.getCategories();
+        if ( categories != null ) {
+            apiGoogleBooksBookModel.categories( Arrays.copyOf( categories, categories.length ) );
+        }
+        apiGoogleBooksBookModel.imgUrl( output.getImgUrl() );
+        String[] isbns = output.getIsbns();
+        if ( isbns != null ) {
+            apiGoogleBooksBookModel.isbns( Arrays.copyOf( isbns, isbns.length ) );
+        }
+
+        return apiGoogleBooksBookModel.build();
+    }
+
+    @Override
+    public List<ApiGoogleBooksBookModel> toGoogleBooksBooks(List<ApiGoogleBooksBookModel> output) {
+        if ( output == null ) {
+            return null;
+        }
+
+        List<ApiGoogleBooksBookModel> list = new ArrayList<ApiGoogleBooksBookModel>( output.size() );
+        for ( ApiGoogleBooksBookModel apiGoogleBooksBookModel : output ) {
+            list.add( apiGoogleBooksBookModel );
         }
 
         return list;

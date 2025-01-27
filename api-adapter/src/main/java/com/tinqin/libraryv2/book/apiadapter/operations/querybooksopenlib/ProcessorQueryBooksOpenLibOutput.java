@@ -12,5 +12,5 @@ import java.util.List;
 @Builder
 @Getter
 public class ProcessorQueryBooksOpenLibOutput implements ProcessorOutput {
-    private List<ProcessorBookOpenLibModel> booksOpenLib;
+    private List<ProcessorBookOpenLibModel> openLibBooks;
 }

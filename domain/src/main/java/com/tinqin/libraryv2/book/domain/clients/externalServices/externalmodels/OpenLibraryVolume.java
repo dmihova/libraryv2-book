@@ -3,12 +3,10 @@ package com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels
 
 import lombok.*;
 
-@Builder
+
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class OpenLibraryDoc extends VolumeInfo {
+public class OpenLibraryVolume extends VolumeInfo {
     private String[] author_name;
     private String[] author_key;
     private String  first_publish_year;

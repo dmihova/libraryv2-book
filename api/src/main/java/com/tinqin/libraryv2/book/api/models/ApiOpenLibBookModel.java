@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class ApiBookOpenLibModel extends ApiOutput {
+public class ApiOpenLibBookModel extends ApiOutput {
 
     String title;
     private String publishYear;

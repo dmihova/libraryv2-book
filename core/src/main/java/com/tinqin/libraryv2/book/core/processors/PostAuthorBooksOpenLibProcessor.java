@@ -2,14 +2,12 @@ package com.tinqin.libraryv2.book.core.processors;
 
 import com.tinqin.libraryv2.book.apiadapter.errors.OperationError;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookBaseModel;
-import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookOpenLibModel;
-import com.tinqin.libraryv2.book.apiadapter.operations.getauthorbooksopenlib.ProcessorGetAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksopenlib.PostAuthorBooksOpenLib;
 import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksopenlib.ProcessorPostAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksopenlib.ProcessorPostAuthorBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.core.errorhandler.base.ErrorHandler;
 import com.tinqin.libraryv2.book.core.errorhandler.exceptions.NotFoundException;
-import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryDoc;
+import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryVolume;
 import com.tinqin.libraryv2.book.domain.clients.externalServices.services.OpenLibrarySearchBook;
 import com.tinqin.libraryv2.book.persistence.models.Author;
 import com.tinqin.libraryv2.book.persistence.models.Book;
@@ -45,7 +43,7 @@ public class PostAuthorBooksOpenLibProcessor implements PostAuthorBooksOpenLib {
                             Author authorInitial = authorRepository
                                     .findById(UUID.fromString(input.getAuthorId()))
                                     .orElseThrow(() -> new NotFoundException(AUTHOR_NOT_FOUND));
-                            List<OpenLibraryDoc> openLibraryDocs = openLibrarySearchBook
+                            List<OpenLibraryVolume> openLibraryDocs = openLibrarySearchBook
                                     .searchBooksByAuthor(authorInitial.getFullName(), 1);
                             Integer newBooksCount = addMissingBooks(authorInitial,openLibraryDocs);
 
@@ -70,7 +68,7 @@ public class PostAuthorBooksOpenLibProcessor implements PostAuthorBooksOpenLib {
                 .mapLeft(errorHandler::handle);
     }
 
-    private Integer addMissingBooks(Author author , List<OpenLibraryDoc> openLibraryDocs) {
+    private Integer addMissingBooks(Author author , List<OpenLibraryVolume> openLibraryDocs) {
         if (openLibraryDocs.isEmpty()) {return 0;}
         Set<String> existingBooks = author
                 .getBooks()
@@ -79,7 +77,7 @@ public class PostAuthorBooksOpenLibProcessor implements PostAuthorBooksOpenLib {
                 .collect(Collectors.toSet());
 
         List<Book> newBooks = new ArrayList<>();
-        for (OpenLibraryDoc openLibraryDoc : openLibraryDocs) {
+        for (OpenLibraryVolume openLibraryDoc : openLibraryDocs) {
             String bookTitle = openLibraryDoc.getTitle();
             if ( openLibraryDoc.getAuthor_name().length>5){
                 //skip anthologies

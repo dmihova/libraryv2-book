@@ -1,14 +1,14 @@
 package com.tinqin.libraryv2.book.core.converters;
 
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookOpenLibModel;
-import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryDoc;
+import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryVolume;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OpenLibraryDocToProcessorBookOpenLib implements Converter<OpenLibraryDoc, ProcessorBookOpenLibModel> {
+public class OpenLibraryDocToProcessorBookOpenLib implements Converter<OpenLibraryVolume, ProcessorBookOpenLibModel> {
     @Override
-    public ProcessorBookOpenLibModel convert(OpenLibraryDoc source) {
+    public ProcessorBookOpenLibModel convert(OpenLibraryVolume source) {
         return ProcessorBookOpenLibModel
                 .builder()
                 .title(source.getTitle() )

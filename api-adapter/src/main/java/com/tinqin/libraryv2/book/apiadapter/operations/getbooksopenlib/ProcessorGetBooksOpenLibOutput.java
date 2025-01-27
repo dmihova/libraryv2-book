@@ -15,6 +15,6 @@ import java.util.UUID;
 @Setter
 public class ProcessorGetBooksOpenLibOutput implements ProcessorOutput {
     private UUID bookId;
-    private List<ProcessorBookOpenLibModel> booksOpenLib;
+    private List<ProcessorBookOpenLibModel> openLibBooks;
 
 }

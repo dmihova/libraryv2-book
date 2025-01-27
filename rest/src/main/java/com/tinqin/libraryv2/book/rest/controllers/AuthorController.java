@@ -4,12 +4,12 @@ import com.tinqin.libraryv2.book.api.ApiRoutes;
 import com.tinqin.libraryv2.book.api.models.ApiError;
 import com.tinqin.libraryv2.book.api.operations.getauthor.ApiGetAuthorInput;
 import com.tinqin.libraryv2.book.api.operations.getauthor.ApiGetAuthorOutput;
+import com.tinqin.libraryv2.book.api.operations.getauthorbooksalgolib.ApiGetAuthorBooksAlgoLibInput;
+import com.tinqin.libraryv2.book.api.operations.getauthorbooksalgolib.ApiGetAuthorBooksAlgoLibOutput;
+import com.tinqin.libraryv2.book.api.operations.getauthorbooksgooglebooks.ApiGetAuthorBooksGoogleBooksInput;
+import com.tinqin.libraryv2.book.api.operations.getauthorbooksgooglebooks.ApiGetAuthorBooksGoogleBooksOutput;
 import com.tinqin.libraryv2.book.api.operations.getauthorbooksopenlib.ApiGetAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.api.operations.getauthorbooksopenlib.ApiGetAuthorBooksOpenLibOutput;
-import com.tinqin.libraryv2.book.api.operations.getbook.ApiGetBookInput;
-import com.tinqin.libraryv2.book.api.operations.getbook.ApiGetBookOutput;
-import com.tinqin.libraryv2.book.api.operations.getbooksopenlib.ApiGetBooksOpenLibInput;
-import com.tinqin.libraryv2.book.api.operations.getbooksopenlib.ApiGetBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.api.operations.postauthorbooksopenlib.ApiPostAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.api.operations.postauthorbooksopenlib.ApiPostAuthorBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.api.operations.queryauthors.ApiQueryAuthorsInput;
@@ -34,10 +34,10 @@ public class AuthorController extends BaseController {
 
     @GetMapping(ApiRoutes.API_AUTHORS)
     public ResponseEntity<?> queryAuthors(
-            @Valid @RequestParam(name = "firstName", required = false ) String firstName,
-            @Valid @RequestParam(name = "lastName", required = false) String lastName ,
-            @Valid @RequestParam(name = "firstNameLike", required = false ) String firstNameLike,
-            @Valid @RequestParam(name = "lastNameLike", required = false) String lastNameLike ,
+            @Valid @RequestParam(name = "firstName", required = false) String firstName,
+            @Valid @RequestParam(name = "lastName", required = false) String lastName,
+            @Valid @RequestParam(name = "firstNameLike", required = false) String firstNameLike,
+            @Valid @RequestParam(name = "lastNameLike", required = false) String lastNameLike,
             @Valid @RequestParam(name = "page", required = false, defaultValue = "0") Integer page
 
     ) {
@@ -52,7 +52,6 @@ public class AuthorController extends BaseController {
         Either<ApiError, ApiQueryAuthorsOutput> result = apiAdapterAuthor.queryAuthors(apiInput);
         return mapToResponseEntity(result, HttpStatus.OK);
     }
-
 
 
     @Operation(summary = "Get author by UUID",
@@ -85,14 +84,36 @@ public class AuthorController extends BaseController {
 
 
     @PostMapping(ApiRoutes.API_AUTHORS_OPEN_LIB_ADD)
-    public ResponseEntity<?> postAuthorBooksOpenLib(@PathVariable("authorId") String authorId ) {
-        ApiPostAuthorBooksOpenLibInput  input = ApiPostAuthorBooksOpenLibInput
+    public ResponseEntity<?> postAuthorBooksOpenLib(@PathVariable("authorId") String authorId) {
+        ApiPostAuthorBooksOpenLibInput input = ApiPostAuthorBooksOpenLibInput
                 .builder()
                 .authorId(authorId)
                 .build();
-        Either<ApiError, ApiPostAuthorBooksOpenLibOutput> result = apiAdapterAuthor.postAuthorBooksOpenLib( input);
+        Either<ApiError, ApiPostAuthorBooksOpenLibOutput> result = apiAdapterAuthor.postAuthorBooksOpenLib(input);
         return mapToResponseEntity(result, HttpStatus.OK);
 
+    }
+
+    @GetMapping(ApiRoutes.API_AUTHORS_ALGO_LIB)
+    public ResponseEntity<?> getAuthorBooksAlgoLib(@PathVariable("authorId") String authorId) {
+        ApiGetAuthorBooksAlgoLibInput apiInput = ApiGetAuthorBooksAlgoLibInput
+                .builder()
+                .authorId(authorId)
+                .build();
+        Either<ApiError, ApiGetAuthorBooksAlgoLibOutput> result = apiAdapterAuthor.getAuthorBooksAlgoLib(apiInput);
+        return mapToResponseEntity(result, HttpStatus.OK);
+    }
+
+    @GetMapping(ApiRoutes.API_AUTHORS_GOOGLE)
+    public ResponseEntity<?> getAuthorBooksGoogleBooks(@PathVariable("authorId") String authorId,
+                                                       @Valid @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) {
+        ApiGetAuthorBooksGoogleBooksInput apiInput = ApiGetAuthorBooksGoogleBooksInput
+                .builder()
+                .authorId(authorId)
+                .page(page)
+                .build();
+        Either<ApiError, ApiGetAuthorBooksGoogleBooksOutput> result = apiAdapterAuthor.getAuthorBooksGoogleBooks(apiInput);
+        return mapToResponseEntity(result, HttpStatus.OK);
     }
 
 }

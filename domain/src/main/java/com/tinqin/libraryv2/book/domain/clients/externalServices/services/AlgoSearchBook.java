@@ -15,13 +15,13 @@ public class AlgoSearchBook {
 
     private final AlgoBookApiClient algoBookApiClient;
 
-    public List<AlgoBookResponse> searchISBN(String isbn) {
+    public AlgoBookVolume searchISBN(String isbn) {
         ResponseEntity<AlgoBookVolume> response = algoBookApiClient.searchISBN(isbn);
-        return List.of();
+        return response.getBody();
     }
-    public List<AlgoBookResponse> searchAuthor(String author) {
+    public List<AlgoBookVolume> searchByAuthor(String author) {
         ResponseEntity<List<AlgoBookVolume>> response = algoBookApiClient.searchAuthor(author);
-        return List.of();
+        return response.getBody();
     }
     public List<AlgoBookVolume> searchTitle(String title) {
         ResponseEntity<List<AlgoBookVolume>> response = algoBookApiClient.searchTitle(title);

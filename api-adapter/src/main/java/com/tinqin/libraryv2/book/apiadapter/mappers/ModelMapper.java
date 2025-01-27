@@ -29,21 +29,19 @@ public interface ModelMapper {
         return description;
     }
 
-
-    ApiBookOpenLibModel toBookOpenLib(ProcessorBookOpenLibModel output);
-
-    List<ApiBookOpenLibModel> toBooksOpenLib(List<ProcessorBookOpenLibModel> output);
-
     ApiAuthorBaseModel toAuthor(ProcessorAuthorBaseModel output);
-
     ApiAuthorModel toAuthor(ProcessorAuthorModel output);
 
     List<ApiBookBaseModel> toBooks(List<ProcessorBookBaseModel> output);
-
     ApiBookBaseModel toBook(ProcessorBookBaseModel output);
 
-    ApiBookAlgoLibModel toBookAlgoLib(ProcessorBookAlgoLibModel output);
 
-    List<ApiBookAlgoLibModel> toBooksAlgoLib(List<ProcessorBookAlgoLibModel> output);
+    ApiOpenLibBookModel toOpenLibBook(ProcessorBookOpenLibModel output);
+    List<ApiOpenLibBookModel> toOpenLibBooks(List<ProcessorBookOpenLibModel> output);
 
+    ApiAlgoLibBookModel toAlgoLibBook(ProcessorBookAlgoLibModel output);
+    List<ApiAlgoLibBookModel> toAlgoLibBooks(List<ProcessorBookAlgoLibModel> output);
+
+    ApiGoogleBooksBookModel toGoogleBooksBook(ProcessorBookGoogleBooksModel output);
+    List<ApiGoogleBooksBookModel> toGoogleBooksBooks(List<ApiGoogleBooksBookModel> output);
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class ProcessorBookAlgoLibModel {
-    String title;
+    private String title;
     private String[] authors;
     private String description;
     private String pages;

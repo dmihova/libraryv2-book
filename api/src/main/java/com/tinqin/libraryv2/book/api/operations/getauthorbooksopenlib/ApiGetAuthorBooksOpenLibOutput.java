@@ -1,6 +1,6 @@
 package com.tinqin.libraryv2.book.api.operations.getauthorbooksopenlib;
 
-import com.tinqin.libraryv2.book.api.models.ApiBookOpenLibModel;
+import com.tinqin.libraryv2.book.api.models.ApiOpenLibBookModel;
 import com.tinqin.libraryv2.book.api.models.base.ApiOutput;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +15,7 @@ import java.util.List;
 @Getter
 public class ApiGetAuthorBooksOpenLibOutput extends ApiOutput {
     private String authorId;
-    private List<ApiBookOpenLibModel> booksOpenLib;
+    private List<ApiOpenLibBookModel> openLibBooks ;
+
 
 }
