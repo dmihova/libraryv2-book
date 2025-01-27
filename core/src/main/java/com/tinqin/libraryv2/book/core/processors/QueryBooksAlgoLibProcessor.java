@@ -78,7 +78,7 @@ public class QueryBooksAlgoLibProcessor implements QueryBooksAlgoLib {
 
         return Try.of(() -> ProcessorQueryBooksAlgoLibOutput
                 .builder()
-                .booksAlgoLib(
+                .algoLibBooks(
                         books
                                 .stream()
                                 .map(book -> conversionService.convert(book, ProcessorBookAlgoLibModel.class))

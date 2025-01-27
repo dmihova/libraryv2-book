@@ -6,8 +6,7 @@ import com.tinqin.libraryv2.book.apiadapter.operations.querybooksopenlib.Process
 import com.tinqin.libraryv2.book.apiadapter.operations.querybooksopenlib.ProcessorQueryBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.apiadapter.operations.querybooksopenlib.QueryBooksOpenLib;
 import com.tinqin.libraryv2.book.core.errorhandler.base.ErrorHandler;
-import com.tinqin.libraryv2.book.core.errorhandler.exceptions.OpenLibException;
-import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryDoc;
+import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryVolume;
 import com.tinqin.libraryv2.book.domain.clients.externalServices.services.OpenLibrarySearchBook;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
@@ -16,7 +15,6 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class QueryBooksOpenLibProcessor implements QueryBooksOpenLib {
                 .mapLeft(errorHandler::handle);
     }
 
-    private Try<List<OpenLibraryDoc>> fetchBooks(ProcessorQueryBooksOpenLibInput input) {
+    private Try<List<OpenLibraryVolume>> fetchBooks(ProcessorQueryBooksOpenLibInput input) {
         return Try.of(() ->
                 openLibrarySearchBook
                          .searchBook(input.getTitle(), input.getAuthor(), input.getPage())
@@ -44,12 +42,12 @@ public class QueryBooksOpenLibProcessor implements QueryBooksOpenLib {
     private Try<ProcessorQueryBooksOpenLibOutput> fetchBook(ProcessorQueryBooksOpenLibInput input) {
         return Try.of(() -> {
 
-            List<OpenLibraryDoc> openLibraryDocs = openLibrarySearchBook
+            List<OpenLibraryVolume> openLibraryDocs = openLibrarySearchBook
                     .searchBook(input.getTitle(), input.getAuthor(), input.getPage());
 
             return ProcessorQueryBooksOpenLibOutput
                     .builder()
-                    .booksOpenLib(
+                    .openLibBooks(
                             openLibraryDocs
                                     .stream()
                                     .map(openLibraryDoc -> conversionService.convert(openLibraryDoc, ProcessorBookOpenLibModel.class))

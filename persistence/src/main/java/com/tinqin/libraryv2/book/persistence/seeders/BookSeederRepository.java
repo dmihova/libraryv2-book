@@ -3,8 +3,10 @@ package com.tinqin.libraryv2.book.persistence.seeders;
 
 import com.tinqin.libraryv2.book.persistence.models.Author;
 import com.tinqin.libraryv2.book.persistence.models.Book;
+import com.tinqin.libraryv2.book.persistence.models.Category;
 import com.tinqin.libraryv2.book.persistence.repositories.AuthorRepository;
 import com.tinqin.libraryv2.book.persistence.repositories.BookRepository;
+import com.tinqin.libraryv2.book.persistence.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -14,20 +16,19 @@ import org.springframework.stereotype.Component;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Component
 @RequiredArgsConstructor
-@Order(1)
+@Order(2)
 
 public class BookSeederRepository implements ApplicationRunner {
 
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final CategoryRepository categoryRepository;
 
 
     @Override
@@ -39,6 +40,12 @@ public class BookSeederRepository implements ApplicationRunner {
         String currentRelativePath = Paths.get("").toAbsolutePath().toString();
         Random rand = new Random();
 
+        Map<String, Category> categoryMap = categoryRepository.findAll()
+                .stream()
+                .collect(Collectors.toMap(
+                        Category::getName, category -> category, (a, b) -> b));
+
+
         List<Book> newBooks = Files.readAllLines(Path.of(fileWithPath))
                 .stream()
                 .filter(textLine -> !textLine.isBlank())
@@ -49,6 +56,7 @@ public class BookSeederRepository implements ApplicationRunner {
                         .builder()
                         .title(bookArray[5].trim())
                         .authors(getDBAuthorList(bookArray[1].trim(), bookArray[2].trim()))
+                        .categories(getCategories(categoryMap,bookArray[0].trim()))
                         .pages(rand.nextInt(50, 1000))
                         .publishYear("")
                         .build())
@@ -57,9 +65,17 @@ public class BookSeederRepository implements ApplicationRunner {
                     return !authorList.isEmpty();
                 })
                 .toList();
-
         bookRepository.saveAll(newBooks);
+    }
 
+    private List<Category> getCategories(Map<String, Category> categoryMap, String inString) {
+        List<Category> categories =   Arrays.stream(inString.split("&"))
+                .map(String::trim)
+                .map(String::toLowerCase)
+                .distinct()
+                .map(categoryMap::get)
+                .collect(Collectors.toList());
+        return categories;
     }
 
     private List<Author> getDBAuthorList(String authorNames1, String authorNames2) {

@@ -11,5 +11,5 @@ import java.util.List;
 @Builder
 @Getter
 public class ProcessorQueryBooksAlgoLibOutput implements ProcessorOutput {
-    private List<ProcessorBookAlgoLibModel> booksAlgoLib;
+    private List<ProcessorBookAlgoLibModel> algoLibBooks;
 }

@@ -62,4 +62,14 @@ public class Book {
     )
     private List<Author> authors;
 
+    @ToString.Exclude
+    @JsonIgnoreProperties("books")
+    @ManyToMany(fetch = FetchType.LAZY )
+    @JoinTable(
+            name = "book_categories",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categories;
+
 }

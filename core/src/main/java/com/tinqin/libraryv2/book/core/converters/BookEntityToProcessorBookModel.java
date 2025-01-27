@@ -4,6 +4,7 @@ package com.tinqin.libraryv2.book.core.converters;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorAuthorBaseModel;
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookModel;
 import com.tinqin.libraryv2.book.persistence.models.Book;
+import com.tinqin.libraryv2.book.persistence.models.Category;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +20,9 @@ public class BookEntityToProcessorBookModel implements Converter<Book, Processor
                 .pages(book.getPages())
                 .description(book.getDescription())
                 .publishYear(book.getPublishYear())
-                .price(book.getPrice())
                 .createdOn(book.getCreatedOn())
                 .updatedOn(book.getUpdatedOn())
-                 .authors(
+                .authors(
                         book.getAuthors()
                                 .stream()
                                 .map(author -> ProcessorAuthorBaseModel.builder()
@@ -32,7 +32,11 @@ public class BookEntityToProcessorBookModel implements Converter<Book, Processor
                                         .build())
                                 .toList()
                 )
-
+                .categories(book.getCategories()
+                        .stream()
+                        .map(Category::getName)
+                        .toList()
+                )
                 .build();
     }
 }

@@ -15,11 +15,11 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
-public class OpenLibrarySearchBook implements SearchBook<OpenLibraryDoc> {
+public class OpenLibrarySearchBook implements SearchBook<OpenLibraryVolume> {
     private final OpenLibraryBookClient openLibraryBookClient;
 
     @Override
-    public List<OpenLibraryDoc> searchBook(String title, String author) {
+    public List<OpenLibraryVolume> searchBook(String title, String author) {
         ResponseEntity<OpenLibrarySearchResponse> response =
                 openLibraryBookClient.search(
                         author==null?"":author,
@@ -29,7 +29,7 @@ public class OpenLibrarySearchBook implements SearchBook<OpenLibraryDoc> {
     }
 
     @Override
-    public List<OpenLibraryDoc> searchBook(String title, String author, Integer page) {
+    public List<OpenLibraryVolume> searchBook(String title, String author, Integer page) {
         ResponseEntity<OpenLibrarySearchResponse> response =
                 openLibraryBookClient.search(author, title, 20, page, "eng");
         return Arrays.stream(formatResult(response)).toList();
@@ -37,11 +37,11 @@ public class OpenLibrarySearchBook implements SearchBook<OpenLibraryDoc> {
     }
 
     @Override
-    public Optional<OpenLibraryDoc> getFirstBook(String title, String author) {
+    public Optional<OpenLibraryVolume> getFirstBook(String title, String author) {
         ResponseEntity<OpenLibrarySearchResponse> response =
                 openLibraryBookClient.search(author, title,
                         1, 1, "eng");
-        OpenLibraryDoc[] docs = formatResult(response);
+        OpenLibraryVolume[] docs = formatResult(response);
         if (docs.length > 0) {
             return Optional.of(docs[0]);
         }
@@ -49,7 +49,7 @@ public class OpenLibrarySearchBook implements SearchBook<OpenLibraryDoc> {
     }
 
     @Override
-    public List<OpenLibraryDoc> searchBooksByAuthor(String author, Integer page) {
+    public List<OpenLibraryVolume> searchBooksByAuthor(String author, Integer page) {
         ResponseEntity<OpenLibrarySearchResponse> response =
                 openLibraryBookClient.searchForAuthor(author,100, page, "eng");
         return Arrays.stream(formatResult(response)).toList();
@@ -57,11 +57,13 @@ public class OpenLibrarySearchBook implements SearchBook<OpenLibraryDoc> {
     }
 
 
-    private OpenLibraryDoc[] formatResult(ResponseEntity<OpenLibrarySearchResponse> response) {
+    private OpenLibraryVolume[] formatResult(ResponseEntity<OpenLibrarySearchResponse> response) {
            return Objects.requireNonNullElse(
                 Objects.requireNonNull(response.getBody()).getDocs(),
-                new OpenLibraryDoc[0]);
+                new OpenLibraryVolume[0]);
 
     }
+
+
 
 }

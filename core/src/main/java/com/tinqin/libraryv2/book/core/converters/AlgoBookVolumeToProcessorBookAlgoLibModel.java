@@ -2,7 +2,6 @@ package com.tinqin.libraryv2.book.core.converters;
 
 import com.tinqin.libraryv2.book.apiadapter.models.ProcessorBookAlgoLibModel;
 import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.AlgoBookVolume;
-import com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels.OpenLibraryDoc;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

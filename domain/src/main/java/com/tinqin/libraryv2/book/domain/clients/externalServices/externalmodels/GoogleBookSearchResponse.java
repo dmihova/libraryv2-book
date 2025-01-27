@@ -1,17 +1,16 @@
 package com.tinqin.libraryv2.book.domain.clients.externalServices.externalmodels;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoogleBookSearchResponse {
 
     long totalItems;
-    List<GoogleBookSearchDto> items;
+    List<GoogleVolume> items;
 }
