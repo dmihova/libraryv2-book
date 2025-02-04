@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class ApiBookBaseModel extends ApiOutput {
 
     private String title;
+    private String subtitle;
     private String bookId;
 
 }

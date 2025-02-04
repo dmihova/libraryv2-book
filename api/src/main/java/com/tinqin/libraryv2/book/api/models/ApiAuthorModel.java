@@ -8,11 +8,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
 public class ApiAuthorModel extends ApiOutput {
+
+        @Getter
         private String authorId;
+        @Getter
         private String firstName;
+        @Getter
         private String lastName;
+        private int bookCount;
+        @Getter
         private List<ApiBookBaseModel> books;
+
+         public int getBookCount() {
+                return books.size();
+        }
+
 }

@@ -27,7 +27,12 @@ public class Book {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "subtitle", nullable = true)
+    private String subtitle;
+
+
+
+    @Column(name = "description",columnDefinition = "TEXT")
     @Builder.Default
     private String description="";
 
@@ -37,6 +42,9 @@ public class Book {
 
     @Column(name = "pages")
     private Integer pages;
+
+    @Column(name = "isbn", nullable = true)
+    private String isbn;
 
     @Column(name = "price", nullable = false)
     @Builder.Default

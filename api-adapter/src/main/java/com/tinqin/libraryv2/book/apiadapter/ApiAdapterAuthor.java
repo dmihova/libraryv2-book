@@ -9,6 +9,8 @@ import com.tinqin.libraryv2.book.api.operations.getauthorbooksgooglebooks.ApiGet
 import com.tinqin.libraryv2.book.api.operations.getauthorbooksgooglebooks.ApiGetAuthorBooksGoogleBooksOutput;
 import com.tinqin.libraryv2.book.api.operations.getauthorbooksopenlib.ApiGetAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.api.operations.getauthorbooksopenlib.ApiGetAuthorBooksOpenLibOutput;
+import com.tinqin.libraryv2.book.api.operations.postauthorbooksgoogle.ApiPostAuthorBooksGoogleInput;
+import com.tinqin.libraryv2.book.api.operations.postauthorbooksgoogle.ApiPostAuthorBooksGoogleOutput;
 import com.tinqin.libraryv2.book.api.operations.postauthorbooksopenlib.ApiPostAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.api.operations.postauthorbooksopenlib.ApiPostAuthorBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.api.operations.queryauthors.ApiQueryAuthorsInput;
@@ -27,6 +29,9 @@ import com.tinqin.libraryv2.book.apiadapter.operations.getauthorbooksgooglebooks
 import com.tinqin.libraryv2.book.apiadapter.operations.getauthorbooksopenlib.GetAuthorBooksOpenLib;
 import com.tinqin.libraryv2.book.apiadapter.operations.getauthorbooksopenlib.ProcessorGetAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.apiadapter.operations.getauthorbooksopenlib.ProcessorGetAuthorBooksOpenLibOutput;
+import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksgoogle.PostAuthorBooksGoogle;
+import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksgoogle.ProcessorPostAuthorBooksGoogleInput;
+import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksgoogle.ProcessorPostAuthorBooksGoogleOutput;
 import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksopenlib.PostAuthorBooksOpenLib;
 import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksopenlib.ProcessorPostAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.apiadapter.operations.postauthorbooksopenlib.ProcessorPostAuthorBooksOpenLibOutput;
@@ -48,6 +53,7 @@ public class ApiAdapterAuthor {
     private final PostAuthorBooksOpenLibMapper postAuthorBooksOpenLibMapper;
     private final GetAuthorBooksAlgoLibMapper getAuthorBooksAlgoLibMapper;
     private final GetAuthorBooksGoogleBooksMapper getAuthorBooksGoogleBooksMapper;
+    private final PostAuthorBooksGoogleMapper postAuthorBooksGoogleMapper;
 
     //Processors
     private final QueryAuthors queryAuthors;
@@ -56,6 +62,7 @@ public class ApiAdapterAuthor {
     private final PostAuthorBooksOpenLib postAuthorBooksOpenLib;
     private final GetAuthorBooksAlgoLib getAuthorBooksAlgoLib;
     private final GetAuthorBooksGoogleBooks getAuthorBooksGoogleBooks;
+    private final PostAuthorBooksGoogle postAuthorBooksGoogle;
 
 
     public Either<ApiError, ApiQueryAuthorsOutput> queryAuthors(ApiQueryAuthorsInput apiInput) {
@@ -122,5 +129,15 @@ public class ApiAdapterAuthor {
 
     }
 
+    public Either<ApiError, ApiPostAuthorBooksGoogleOutput> postAuthorBooksGoogle(ApiPostAuthorBooksGoogleInput apiInput) {
+        ProcessorPostAuthorBooksGoogleInput operationInput = postAuthorBooksGoogleMapper.toOperation(apiInput);
+
+        Either<OperationError, ProcessorPostAuthorBooksGoogleOutput> processed = postAuthorBooksGoogle.process(operationInput);
+
+        return processed.isRight()
+                ? Either.right(postAuthorBooksGoogleMapper.toApiResult(processed.get()))
+                : Either.left(modelMapper.toApiError(processed.getLeft()));
+
+    }
 
 }

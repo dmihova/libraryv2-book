@@ -9,6 +9,7 @@ import lombok.Getter;
 @Getter
 public class ProcessorBookBaseModel {
     private String title;
+    private String subtitle;
     private String bookId;
 
 }

@@ -16,6 +16,4 @@ public class ApiGetAuthorOutput extends ApiOutput {
     private ApiAuthorModel author;
 
 
-
-
 }

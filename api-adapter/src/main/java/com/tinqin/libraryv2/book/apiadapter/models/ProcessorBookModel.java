@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 public class ProcessorBookModel {
     private String title;
+    private String subtitle;
     private String bookId;
     private String description;
     private String publishYear;

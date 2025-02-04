@@ -22,7 +22,7 @@ public class AuthorEntityToProcessorAuthorModel implements Converter<Author, Pro
                                 .map(book -> ProcessorBookBaseModel.builder()
                                         .bookId(book.getId().toString())
                                         .title(book.getTitle())
-
+                                        .subtitle(book.getSubtitle()!=null?book.getSubtitle():"")
                                         .build())
                                 .toList()
                 )
