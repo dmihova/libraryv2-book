@@ -10,6 +10,8 @@ import com.tinqin.libraryv2.book.api.operations.getauthorbooksgooglebooks.ApiGet
 import com.tinqin.libraryv2.book.api.operations.getauthorbooksgooglebooks.ApiGetAuthorBooksGoogleBooksOutput;
 import com.tinqin.libraryv2.book.api.operations.getauthorbooksopenlib.ApiGetAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.api.operations.getauthorbooksopenlib.ApiGetAuthorBooksOpenLibOutput;
+import com.tinqin.libraryv2.book.api.operations.postauthorbooksgoogle.ApiPostAuthorBooksGoogleInput;
+import com.tinqin.libraryv2.book.api.operations.postauthorbooksgoogle.ApiPostAuthorBooksGoogleOutput;
 import com.tinqin.libraryv2.book.api.operations.postauthorbooksopenlib.ApiPostAuthorBooksOpenLibInput;
 import com.tinqin.libraryv2.book.api.operations.postauthorbooksopenlib.ApiPostAuthorBooksOpenLibOutput;
 import com.tinqin.libraryv2.book.api.operations.queryauthors.ApiQueryAuthorsInput;
@@ -114,6 +116,17 @@ public class AuthorController extends BaseController {
                 .build();
         Either<ApiError, ApiGetAuthorBooksGoogleBooksOutput> result = apiAdapterAuthor.getAuthorBooksGoogleBooks(apiInput);
         return mapToResponseEntity(result, HttpStatus.OK);
+    }
+
+    @PostMapping(ApiRoutes.API_AUTHORS_GOOGLE_ADD)
+    public ResponseEntity<?> postAuthorBooksGoogle(@PathVariable("authorId") String authorId) {
+        ApiPostAuthorBooksGoogleInput input = ApiPostAuthorBooksGoogleInput
+                .builder()
+                .authorId(authorId)
+                .build();
+        Either<ApiError, ApiPostAuthorBooksGoogleOutput> result = apiAdapterAuthor.postAuthorBooksGoogle(input);
+        return mapToResponseEntity(result, HttpStatus.OK);
+
     }
 
 }

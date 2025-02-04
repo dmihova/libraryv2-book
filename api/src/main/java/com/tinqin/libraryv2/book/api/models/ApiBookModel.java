@@ -14,6 +14,7 @@ import java.util.List;
 public class ApiBookModel extends ApiOutput {
 
     private String title;
+    private String subtitle;
     private String bookId;
     private String description;
     private String publishYear;

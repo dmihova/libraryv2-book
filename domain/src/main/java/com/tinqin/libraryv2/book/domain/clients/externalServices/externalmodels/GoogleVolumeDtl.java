@@ -13,6 +13,7 @@ public class GoogleVolumeDtl {
     private String description;
     private Integer pageCount;
     private String[] categories;
+    private String publishedDate;
     private ImageLink imageLinks  ;
     private IndustryIdentifier []industryIdentifiers;
 
@@ -31,7 +32,7 @@ public class GoogleVolumeDtl {
     }
     @Getter
     @Setter
-    public static class ImageLink {
+    public  class ImageLink {
         private String thumbnail;
         private String smallThumbnail;
     }

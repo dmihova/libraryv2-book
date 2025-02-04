@@ -14,6 +14,7 @@ public class BookEntityToProcessorBookBaseModel implements Converter<Book, Proce
                 .builder()
                 .bookId(book.getId().toString())
                 .title(book.getTitle())
+                .subtitle(book.getSubtitle()==null?"":book.getSubtitle())
                 .build();
     }
 }

@@ -17,6 +17,7 @@ public class BookEntityToProcessorBookModel implements Converter<Book, Processor
                 .builder()
                 .bookId(book.getId().toString())
                 .title(book.getTitle())
+                .subtitle(book.getSubtitle())
                 .pages(book.getPages())
                 .description(book.getDescription())
                 .publishYear(book.getPublishYear())

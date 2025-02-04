@@ -9,6 +9,7 @@ import java.util.UUID;
 @Table
 @Entity
 @Getter
+
 public class AuthorStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -16,4 +17,12 @@ public class AuthorStatus {
     private UUID id;
 
     private UUID authorUID;
+    public AuthorStatus() {
+
+    }
+    public AuthorStatus(UUID authorUID) {
+        this.authorUID = authorUID;
+    }
+
+
 }

@@ -17,7 +17,7 @@ public class AlgoBookVolume extends VolumeInfo {
     private String[] categories;
     private ISBN[] iSBNidentifiers;
 
-    public static class ISBN {
+    public class ISBN {
         private String type;
         private String identifier;
     }
